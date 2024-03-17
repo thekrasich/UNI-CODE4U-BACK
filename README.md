@@ -18,3 +18,8 @@
 
 4. Здійснення замовлення:
    * Після оформлення замовлення користувач отримає повідомлення з проханням очікувати дзвінок оператора для підтвердження.
+
+## Посилання
+
+1. [Фронтенд](https://github.com/thekrasich/UNI-CODE4U-FRONT)
+2. [ER-діаграма](https://github.com/thekrasich/UNI-CODE4U-BACK/blob/main/docs/ER%20diagram.svg)
