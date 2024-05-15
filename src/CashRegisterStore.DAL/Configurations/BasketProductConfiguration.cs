@@ -11,8 +11,8 @@ namespace CashRegisterStore.DAL.Configurations
             builder.HasKey(bp => new { bp.BasketId, bp.ProductId });
 
             builder.HasOne<Basket>()
-                .WithOne()
-                .HasForeignKey<BasketProduct>(bp => bp.BasketId);
+                .WithMany()
+                .HasForeignKey(bp => bp.BasketId);
 
             builder.HasOne<Product>()
                 .WithMany()
