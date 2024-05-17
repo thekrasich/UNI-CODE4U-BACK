@@ -1,4 +1,7 @@
-using CashRegisterStore.DAL;
+using CashRegisterStore.DAL.Data;
+using CashRegisterStore.DAL.Mapper;
+using CashRegisterStore.DAL.Repository.Abstract;
+using CashRegisterStore.DAL.Repository.Concrete;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +16,19 @@ builder.Services.AddDbContext<CashRegisterStoreDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString(nameof(CashRegisterStoreDbContext)));
 });
+//builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
+builder.Services.AddScoped<IBasketRepository,BasketRepository>();
+builder.Services.AddScoped<IBasketProductRepository, BasketProductRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOrderProductRepository, OrderProductRepository>();
+builder.Services.AddScoped<IPhotoRepository, PhotoRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<ISubcategoryRepository, SubcategoryRepository>();
+builder.Services.AddScoped<IUserRepository,UserRepository>();
+
 
 var app = builder.Build();
 
