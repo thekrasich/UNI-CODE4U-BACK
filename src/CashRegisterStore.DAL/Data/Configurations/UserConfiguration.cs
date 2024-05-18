@@ -19,14 +19,14 @@ namespace CashRegisterStore.DAL.Data.Configurations
             builder.Property(u => u.Email)
                 .HasMaxLength(254);
 
-            builder.HasIndex(u => u.Email)
+            /*builder.HasIndex(u => u.Email)
                 .IsUnique();
 
             builder.Property(u => u.Password)
                 .HasMaxLength(64);
 
             builder.HasIndex(u => u.PhoneNumber)
-                .IsUnique();
+                .IsUnique();*/
 
             builder.Property(u => u.Role)
                 .IsFixedLength()

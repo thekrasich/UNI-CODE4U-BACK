@@ -1,12 +1,6 @@
 ﻿using AutoMapper;
 using CashRegisterStore.DAL.Data.Entities;
 using CashRegisterStore.DAL.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 
 namespace CashRegisterStore.DAL.Mapper
 {
@@ -24,7 +18,5 @@ namespace CashRegisterStore.DAL.Mapper
             CreateMap<UserDto, User>().ReverseMap();
         }
         
-    }
-
-    
+    } 
 }

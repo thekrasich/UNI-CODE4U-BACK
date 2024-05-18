@@ -9,23 +9,23 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace CashRegisterStore.DAL.Data.Migrations
+namespace CashRegisterStore.DAL.Migrations
 {
     [DbContext(typeof(CashRegisterStoreDbContext))]
-    [Migration("20240515075612_FixDbSchema")]
-    partial class FixDbSchema
+    [Migration("20240518160230_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.3")
+                .HasAnnotation("ProductVersion", "8.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("DAL.Models.Basket", b =>
+            modelBuilder.Entity("CashRegisterStore.DAL.Data.Entities.Basket", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -44,7 +44,7 @@ namespace CashRegisterStore.DAL.Data.Migrations
                     b.ToTable("Baskets");
                 });
 
-            modelBuilder.Entity("DAL.Models.BasketProduct", b =>
+            modelBuilder.Entity("CashRegisterStore.DAL.Data.Entities.BasketProduct", b =>
                 {
                     b.Property<long>("BasketId")
                         .HasColumnType("bigint");
@@ -62,7 +62,7 @@ namespace CashRegisterStore.DAL.Data.Migrations
                     b.ToTable("BasketProducts");
                 });
 
-            modelBuilder.Entity("DAL.Models.Category", b =>
+            modelBuilder.Entity("CashRegisterStore.DAL.Data.Entities.Category", b =>
                 {
                     b.Property<short>("Id")
                         .ValueGeneratedOnAdd()
@@ -83,7 +83,7 @@ namespace CashRegisterStore.DAL.Data.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("DAL.Models.Order", b =>
+            modelBuilder.Entity("CashRegisterStore.DAL.Data.Entities.Order", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -111,7 +111,7 @@ namespace CashRegisterStore.DAL.Data.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("DAL.Models.OrderProduct", b =>
+            modelBuilder.Entity("CashRegisterStore.DAL.Data.Entities.OrderProduct", b =>
                 {
                     b.Property<long>("OrderId")
                         .HasColumnType("bigint");
@@ -129,7 +129,7 @@ namespace CashRegisterStore.DAL.Data.Migrations
                     b.ToTable("OrderProducts");
                 });
 
-            modelBuilder.Entity("DAL.Models.Photo", b =>
+            modelBuilder.Entity("CashRegisterStore.DAL.Data.Entities.Photo", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -152,7 +152,7 @@ namespace CashRegisterStore.DAL.Data.Migrations
                     b.ToTable("Photos");
                 });
 
-            modelBuilder.Entity("DAL.Models.Product", b =>
+            modelBuilder.Entity("CashRegisterStore.DAL.Data.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -189,7 +189,7 @@ namespace CashRegisterStore.DAL.Data.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("DAL.Models.Subcategory", b =>
+            modelBuilder.Entity("CashRegisterStore.DAL.Data.Entities.Subcategory", b =>
                 {
                     b.Property<short>("Id")
                         .ValueGeneratedOnAdd()
@@ -215,7 +215,7 @@ namespace CashRegisterStore.DAL.Data.Migrations
                     b.ToTable("Subcategories");
                 });
 
-            modelBuilder.Entity("DAL.Models.User", b =>
+            modelBuilder.Entity("CashRegisterStore.DAL.Data.Entities.User", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -223,33 +223,70 @@ namespace CashRegisterStore.DAL.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("text");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(254)
                         .HasColumnType("character varying(254)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
 
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("text");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("text");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(64)
                         .HasColumnType("character varying(64)");
 
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("text");
+
                     b.Property<long>("PhoneNumber")
                         .HasColumnType("bigint");
 
-                    b.Property<char>("Role")
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
                         .HasMaxLength(1)
                         .HasColumnType("character(1)")
                         .IsFixedLength();
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("text");
 
                     b.Property<string>("Surname")
                         .IsRequired()
                         .HasMaxLength(60)
                         .HasColumnType("character varying(60)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -262,75 +299,75 @@ namespace CashRegisterStore.DAL.Data.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("DAL.Models.Basket", b =>
+            modelBuilder.Entity("CashRegisterStore.DAL.Data.Entities.Basket", b =>
                 {
-                    b.HasOne("DAL.Models.User", null)
+                    b.HasOne("CashRegisterStore.DAL.Data.Entities.User", null)
                         .WithOne()
-                        .HasForeignKey("DAL.Models.Basket", "UserId")
+                        .HasForeignKey("CashRegisterStore.DAL.Data.Entities.Basket", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DAL.Models.BasketProduct", b =>
+            modelBuilder.Entity("CashRegisterStore.DAL.Data.Entities.BasketProduct", b =>
                 {
-                    b.HasOne("DAL.Models.Basket", null)
+                    b.HasOne("CashRegisterStore.DAL.Data.Entities.Basket", null)
                         .WithMany()
                         .HasForeignKey("BasketId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DAL.Models.Product", null)
+                    b.HasOne("CashRegisterStore.DAL.Data.Entities.Product", null)
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DAL.Models.Order", b =>
+            modelBuilder.Entity("CashRegisterStore.DAL.Data.Entities.Order", b =>
                 {
-                    b.HasOne("DAL.Models.User", null)
+                    b.HasOne("CashRegisterStore.DAL.Data.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DAL.Models.OrderProduct", b =>
+            modelBuilder.Entity("CashRegisterStore.DAL.Data.Entities.OrderProduct", b =>
                 {
-                    b.HasOne("DAL.Models.Order", null)
+                    b.HasOne("CashRegisterStore.DAL.Data.Entities.Order", null)
                         .WithMany()
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DAL.Models.Product", null)
+                    b.HasOne("CashRegisterStore.DAL.Data.Entities.Product", null)
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DAL.Models.Photo", b =>
+            modelBuilder.Entity("CashRegisterStore.DAL.Data.Entities.Photo", b =>
                 {
-                    b.HasOne("DAL.Models.Product", null)
+                    b.HasOne("CashRegisterStore.DAL.Data.Entities.Product", null)
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DAL.Models.Product", b =>
+            modelBuilder.Entity("CashRegisterStore.DAL.Data.Entities.Product", b =>
                 {
-                    b.HasOne("DAL.Models.Subcategory", null)
+                    b.HasOne("CashRegisterStore.DAL.Data.Entities.Subcategory", null)
                         .WithMany()
                         .HasForeignKey("SubcategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DAL.Models.Subcategory", b =>
+            modelBuilder.Entity("CashRegisterStore.DAL.Data.Entities.Subcategory", b =>
                 {
-                    b.HasOne("DAL.Models.Category", null)
+                    b.HasOne("CashRegisterStore.DAL.Data.Entities.Category", null)
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)

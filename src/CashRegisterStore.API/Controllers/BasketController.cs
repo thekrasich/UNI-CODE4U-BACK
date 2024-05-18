@@ -1,13 +1,13 @@
-﻿using AutoMapper;
-using CashRegisterStore.DAL.Data.Entities;
+﻿using CashRegisterStore.DAL.Data.Entities;
 using CashRegisterStore.DAL.Repository.Abstract;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CashRegisterStore.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "U")]
     public class BasketController : ControllerBase
     {
         private readonly IBasketRepository _basketRepository;

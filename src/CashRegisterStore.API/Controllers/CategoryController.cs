@@ -2,15 +2,14 @@
 using CashRegisterStore.DAL.Data.Entities;
 using CashRegisterStore.DAL.DTOs;
 using CashRegisterStore.DAL.Repository.Abstract;
-using CashRegisterStore.DAL.Repository.Concrete;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NuGet.ContentModel;
 
 namespace CashRegisterStore.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "A")]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryRepository _categoryRepository;
