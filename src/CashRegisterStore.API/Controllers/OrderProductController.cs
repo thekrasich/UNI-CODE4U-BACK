@@ -2,8 +2,6 @@
 using CashRegisterStore.DAL.Data.Entities;
 using CashRegisterStore.DAL.DTOs;
 using CashRegisterStore.DAL.Repository.Abstract;
-using CashRegisterStore.DAL.Repository.Concrete;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CashRegisterStore.API.Controllers

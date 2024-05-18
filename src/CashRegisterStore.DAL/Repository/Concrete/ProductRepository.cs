@@ -1,11 +1,6 @@
 ﻿using CashRegisterStore.DAL.Data;
 using CashRegisterStore.DAL.Data.Entities;
 using CashRegisterStore.DAL.Repository.Abstract;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CashRegisterStore.DAL.Repository.Concrete
 {

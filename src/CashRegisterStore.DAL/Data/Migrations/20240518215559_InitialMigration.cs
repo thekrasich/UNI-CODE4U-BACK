@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace CashRegisterStore.DAL.Data.Migrations
+namespace CashRegisterStore.DAL.Migrations
 {
     /// <inheritdoc />
     public partial class InitialMigration : Migration
@@ -33,10 +33,21 @@ namespace CashRegisterStore.DAL.Data.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     Surname = table.Column<string>(type: "character varying(60)", maxLength: 60, nullable: false),
-                    Email = table.Column<string>(type: "character varying(254)", maxLength: 254, nullable: false),
-                    Password = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false),
-                    PhoneNumber = table.Column<long>(type: "bigint", nullable: false),
-                    Role = table.Column<char>(type: "character(1)", fixedLength: true, maxLength: 1, nullable: false)
+                    Role = table.Column<string>(type: "character(1)", fixedLength: true, maxLength: 1, nullable: false),
+                    UserName = table.Column<string>(type: "text", nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "text", nullable: true),
+                    Email = table.Column<string>(type: "text", nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "text", nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "boolean", nullable: false),
+                    PasswordHash = table.Column<string>(type: "text", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "text", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "text", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "boolean", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "boolean", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "boolean", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -197,12 +208,6 @@ namespace CashRegisterStore.DAL.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_BasketProducts_BasketId",
-                table: "BasketProducts",
-                column: "BasketId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_BasketProducts_ProductId",
                 table: "BasketProducts",
                 column: "ProductId");
@@ -217,12 +222,6 @@ namespace CashRegisterStore.DAL.Data.Migrations
                 name: "IX_Categories_Name",
                 table: "Categories",
                 column: "Name",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrderProducts_OrderId",
-                table: "OrderProducts",
-                column: "OrderId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -269,18 +268,6 @@ namespace CashRegisterStore.DAL.Data.Migrations
                 name: "IX_Subcategories_Name",
                 table: "Subcategories",
                 column: "Name",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_Email",
-                table: "Users",
-                column: "Email",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_PhoneNumber",
-                table: "Users",
-                column: "PhoneNumber",
                 unique: true);
         }
 

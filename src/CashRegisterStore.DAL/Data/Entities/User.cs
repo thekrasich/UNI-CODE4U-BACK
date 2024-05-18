@@ -1,13 +1,12 @@
-﻿namespace CashRegisterStore.DAL.Data.Entities
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace CashRegisterStore.DAL.Data.Entities
 {
-    public class User
+    public class User : IdentityUser
     {
         public long Id { get; set; }
         public string Name { get; set; }
-        public string Surname { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public long PhoneNumber { get; set; }
-        public char Role { get; set; }
+        public string Surname { get; set; }       
+        public string Role { get; set; }
     }
 }
