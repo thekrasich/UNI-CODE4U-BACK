@@ -32,6 +32,13 @@ namespace CashRegisterStore.API.Controllers
             return Ok(photo);
         }
 
+        [HttpGet("by-product/{productId}")]
+        public async Task<ActionResult<List<Photo>>> GetPhotoByProductId(int productId)
+        {
+            var photo = await _photoRepository.GetPhotosByProductIdAsync(productId);
+            return Ok(photo);
+        }
+
         [HttpPost]
         public async Task<ActionResult<Photo>> CreatePhoto(Photo photo)
         {
@@ -51,7 +58,6 @@ namespace CashRegisterStore.API.Controllers
             photo.Id = id;
             await _photoRepository.UpdatePath(photo);
             return NoContent();
-
         }
     }
 }

@@ -5,5 +5,6 @@ namespace CashRegisterStore.DAL.Repository.Abstract
     public interface IPhotoRepository : IGenericRepository<Photo>
     {
         Task UpdatePath(Photo photo);
+        Task<List<Photo>> GetPhotosByProductIdAsync(int productId);
     }
 }
